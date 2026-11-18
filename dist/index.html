@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#142d2a">
+  <meta name="description" content="幽面 Veil Studio — 在浏览器里制作幽灵遮罩和悬疑角色海报。自动定位人脸、手动微调、高清 PNG 导出，图片不离开你的设备。">
+  <title>幽面 Veil Studio · 给故事一个神秘面孔</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="header"><a class="brand" href="./" aria-label="幽面首页"><svg viewBox="0 0 40 44" aria-hidden="true"><path d="M4 39V21a16 16 0 0 1 32 0v18l-8-4-8 4-8-4z" fill="currentColor"/><ellipse cx="15" cy="21" rx="2.5" ry="4" fill="#142d2a"/><ellipse cx="26" cy="21" rx="2.5" ry="4" fill="#142d2a"/></svg><span>幽面 <small>VEIL STUDIO</small></span></a><nav><span class="private"><i></i> 图片只在本机处理</span><button class="text-button" id="help">使用指南 <span>↗</span></button></nav></header>
+<main>
+<section class="intro"><div><p class="eyebrow">A LITTLE MYSTERY. A BIGGER STORY.</p><h1>藏起面孔，<em>放大故事。</em></h1><p class="intro-copy">从一张角色图，到一张悬疑海报。给面孔戴上幽灵面具，让故事先于身份登场。</p></div><div class="intro-note"><span>01 / 导入图片</span><span>02 / 设计遮罩</span><span>03 / 导出作品</span></div></section>
+<section class="workspace" aria-label="图片编辑工作台">
+ <div class="preview-panel">
+  <div class="panel-top"><div class="mode-tabs" aria-label="画布模式"><button class="active" data-format="poster" aria-pressed="true">海报构图</button><button data-format="original" aria-pressed="false">原图遮罩</button></div><span class="demo-badge" id="demo-badge">示例画布</span></div>
+  <div class="canvas-area" id="dropzone"><div class="canvas-holder"><canvas id="canvas" aria-label="作品预览；选择移动工具后可拖动遮罩，添加工具下点击可补充遮罩" tabindex="0"></canvas></div><div class="drop-overlay">松开，导入你的图片</div></div>
+  <div class="preview-bottom"><span id="image-info">示例角色 · 可直接体验</span><div class="history"><button id="undo" title="撤销 (⌘/Ctrl Z)" aria-label="撤销" disabled>↶</button><button id="redo" title="重做 (⌘/Ctrl Shift Z)" aria-label="重做" disabled>↷</button><button id="compare" title="按住查看未遮罩版本">◉ 对比原图</button></div></div>
+  <div class="upload-bar"><div><strong>换成你的角色，故事就开始了。</strong><span>拖入、粘贴或选择图片 · JPG / PNG / WEBP · 最大 20 MB</span></div><button class="button upload" id="upload">＋ 导入图片</button><input type="file" id="file" accept="image/jpeg,image/png,image/webp" hidden></div>
+ </div>
+ <aside class="controls" aria-label="作品设置">
+  <section class="control-section"><div class="section-title"><h2>面孔的另一面</h2><span>01</span></div><div class="style-grid" role="group" aria-label="遮罩样式">
+    <button class="style-choice active" data-style="ghost" aria-pressed="true"><span class="style-symbol ghost-symbol">♟</span>幽灵</button>
+    <button class="style-choice" data-style="eyes" aria-pressed="false"><span class="style-symbol">━</span>眼罩</button>
+    <button class="style-choice" data-style="circle" aria-pressed="false"><span class="style-symbol">●</span>白圈</button>
+    <button class="style-choice" data-style="pixel" aria-pressed="false"><span class="style-symbol">▦</span>像素</button>
+  </div><div class="row-label"><label for="mask-scale">遮罩大小</label><output id="scale-value">100%</output></div><input id="mask-scale" type="range" min="55" max="180" value="100" step="5"><p class="subtle" id="selection-note">选中一个遮罩可单独调整；未选中时调整全部。</p>
+  <div class="tool-row" role="group" aria-label="遮罩工具"><button data-tool="move" class="active" aria-pressed="true">↖ 移动</button><button data-tool="add" aria-pressed="false">＋ 补一个</button><button id="delete-mask">⌫ 删除</button></div><button class="detect-button" id="detect">✧ 自动定位人脸</button><p class="tool-hint" id="tool-hint">点击遮罩选中，拖动调整位置。</p>
+  </section>
+  <section class="control-section" id="poster-settings"><div class="section-title"><h2>给故事定调</h2><span>02</span></div><div class="scene-grid" aria-label="海报氛围"><button class="scene active" data-scene="mist" aria-pressed="true"><i class="mist"></i>雾夜</button><button class="scene" data-scene="blood" aria-pressed="false"><i class="blood"></i>血月</button><button class="scene" data-scene="violet" aria-pressed="false"><i class="violet"></i>午夜</button></div><label class="field-label" for="title">海报标题 <span>最多 18 字</span></label><input id="title" class="text-input" maxlength="18" value="今夜，无人知晓" placeholder="为你的故事起个名字"><label class="field-label" for="subtitle">一句故事 <span>最多 50 字</span></label><input id="subtitle" class="text-input" maxlength="50" value="每一张面孔，都有未被说出的秘密。" placeholder="写下一句悬念"><div class="row-label"><label for="ratio">画幅比例</label><select id="ratio"><option value="4:5">4:5 · 角色海报</option><option value="9:16">9:16 · 竖屏封面</option><option value="1:1">1:1 · 方形卡片</option></select></div></section>
+  <section class="export-section"><div class="export-meta"><span id="output-size">1200 × 1500 PX</span><span>PNG · 高清无水印</span></div><button id="export" class="button export">导出这份神秘 <span>↓</span></button><div class="project-actions"><button id="save-project">保存编辑文件</button><span>·</span><button id="open-project">打开编辑文件</button><input type="file" id="project-file" accept="application/json,.json" hidden></div></section>
+ </aside>
+</section>
+<div class="status-line" role="status" aria-live="polite"><span class="status-dot"></span><span id="status">示例已就绪。可以先换个面具，或导入你的角色图。</span></div>
+<section class="notes"><div><span class="note-number">01</span><h3>为创作者留白</h3><p>角色设定、悬疑封面、万圣节海报。让一个面具，成为你的叙事线索。</p></div><div><span class="note-number">02</span><h3>每个细节都能掌控</h3><p>自动定位后自由移动、补充和缩放。非人类角色或漏检的脸，也可手动处理。</p></div><div><span class="note-number">03</span><h3>素材始终属于你</h3><p>识别和导出都在浏览器完成。无登录、无素材上传，编辑文件也由你自己保管。</p></div></section>
+</main>
+<footer><a class="footer-brand" href="./">幽面 <span>VEIL STUDIO</span></a><span>Made for the stories after dark.</span><button class="text-button" id="about">关于与开源说明 ↗</button></footer>
+<dialog id="info-dialog"><button id="close-dialog" class="close" aria-label="关闭">×</button><div id="dialog-content"></div></dialog>
+<script type="module" src="./app.mjs"></script>
+</body></html>

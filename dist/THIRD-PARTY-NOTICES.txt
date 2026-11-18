@@ -1,0 +1,18 @@
+Veil Studio third-party notices
+
+Google MediaPipe Tasks Vision 0.10.21 JavaScript runtime and WASM files.
+License: Apache License 2.0.
+Upstream: https://github.com/google-ai-edge/mediapipe
+License text: vendor/APACHE-2.0.txt
+
+MediaPipe Face Landmarker model bundle, face_landmarker.task.
+Source: https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+The MediaPipe project distributes this model for Face Landmarker under its
+published project/model terms. Retain upstream model files and notices.
+
+These runtime/model copies were already present in the author's Baiquan
+project before this application was started. They are disclosed as
+pre-existing third-party resources, not original Veil Studio code.
+
+No original user images are bundled. The example portrait is an original
+procedural illustration drawn by Veil Studio's renderer.
